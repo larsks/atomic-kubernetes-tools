@@ -1,0 +1,12 @@
+#kube-pod
+id: dbserver
+desiredState:
+  manifest:
+    version: v1beta1
+    id: dbserver
+    containers:
+    - image: mysql
+      name: dbserver
+      env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: secret
