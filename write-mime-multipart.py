@@ -47,6 +47,7 @@ def parse_args():
     p = argparse.ArgumentParser()
 
     p.add_argument('--output', '-o')
+    p.add_argument('--merge', '-M')
     p.add_argument('--default-mimetype', '-T',
                    default='application/octet-stream')
 
@@ -84,6 +85,10 @@ def main():
             with open(path) as fd:
                 data.set_payload(fd.read())
             encoders.encode_base64(data)
+
+        if args.merge:
+            data.add_header('X-Merge-Type',
+                                 args.merge)
 
         container.attach(data)
 
